@@ -1,16 +1,1 @@
-<main class="main">
-  <div class="content">app component hello world!</div>
-
-  @if (isLoading()) {
-    <p>loading...</p>
-  } @else {
-    @for (
-      bird of notableObservations();
-      track `${bird.obsDt}${bird.subId}${bird.comName}`
-    ) {
-      <p>{{ bird.comName }}</p>
-      <p>{{ bird.locName }}</p>
-    }
-  }
-</main>
-<router-outlet />
+<app-navbar /> <router-outlet />

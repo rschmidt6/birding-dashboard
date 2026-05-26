@@ -1,0 +1,15 @@
+<nav>
+  <a routerLink="/">ATX Birding</a>
+
+  <div class="nav-links">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <!-- exact: true means only mark active on exactly '/', not on '/anything-else' -->
+      Map
+    </a>
+    <a routerLink="/dashboard" routerLinkActive="active"> Dashboard </a>
+  </div>
+</nav>

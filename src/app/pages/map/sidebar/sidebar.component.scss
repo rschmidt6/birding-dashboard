@@ -1,0 +1,37 @@
+:host {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  bottom: 24px;
+  width: 360px;
+  z-index: 1000; /* leaflet uses z-index internally so needs to be high enough */
+  background: #eae8e8;
+  border-radius: 12px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #fff;
+}
+
+.bird-card {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bird-name {
+  font-weight: 800;
+}
+
+.bird-location {
+  font-style: italic;
+}
+
+.bird-time {
+  color: #6f6f6f;
+  font-size: 12px;
+}

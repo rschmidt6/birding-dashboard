@@ -1,0 +1,16 @@
+@if (this.isLoading()) {
+  <p>loading...</p>
+} @else {
+  @for (
+    bird of notableObservations();
+    track `${bird.obsDt}${bird.subId}${bird.comName}`
+  ) {
+    <div class="bird-card" (click)="selectBird(bird)">
+      <p class="bird-name">{{ bird.comName }}</p>
+      <p class="bird-location">{{ bird.locName }}</p>
+      <p class="bird-time">
+        {{ bird.obsDt | date }} - {{ bird.obsDt | date: "shortTime" }}
+      </p>
+    </div>
+  }
+}
