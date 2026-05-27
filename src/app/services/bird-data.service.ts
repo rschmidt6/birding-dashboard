@@ -21,6 +21,14 @@ export class BirdDataService {
       },
     );
   }
+  getSpeciesList() {
+    return this.http.get<string[]>(
+      `${this.baseUrl}/product/spplist/${this.regionCode}`,
+      {
+        headers: { 'X-eBirdApiToken': this.apiKey },
+      },
+    );
+  }
   getRecentObservations() {
     return this.http.get<Bird[]>(
       `${this.baseUrl}/data/obs/${this.regionCode}/recent`,
@@ -32,19 +40,6 @@ export class BirdDataService {
   getRecentNotableObservations() {
     return this.http.get<Bird[]>(
       `${this.baseUrl}/data/obs/${this.regionCode}/recent/notable`,
-      {
-        headers: { 'X-eBirdApiToken': this.apiKey },
-      },
-    );
-  }
-
-  // getHotspots() {
-  //   return this.http.get(`{${this.baseUrl}/ref/hotspot/${this.regionCode}`);
-  // }
-
-  getSpeciesList() {
-    return this.http.get<string>(
-      `${this.baseUrl}/product/spplist/${this.regionCode}`,
       {
         headers: { 'X-eBirdApiToken': this.apiKey },
       },

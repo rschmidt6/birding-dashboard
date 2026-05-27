@@ -1,5 +1,5 @@
+import { BirdStateService } from './../../services/bird-state.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { BirdDataService } from '../../services/bird-data.service';
 
 @Component({
   selector: 'app-species',
@@ -8,11 +8,9 @@ import { BirdDataService } from '../../services/bird-data.service';
   styleUrl: './species.component.scss',
 })
 export class SpeciesComponent implements OnInit {
-  birdDataService = inject(BirdDataService);
+  birdStateService = inject(BirdStateService);
 
-  ngOnInit(): void {
-    this.birdDataService.getSpeciesList().subscribe((data) => {
-      console.log(data);
-    });
-  }
+  birds = this.birdStateService.fullTaxonomyList;
+
+  ngOnInit(): void {}
 }

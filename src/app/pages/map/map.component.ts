@@ -18,7 +18,7 @@ export class MapComponent implements AfterViewInit {
 
   constructor() {
     effect(() => {
-      const bird = this.birdStateService.currentBird();
+      const bird = this.birdStateService.selectedNotableBird();
       if (bird && this.map) {
         console.log(bird);
         // remove previous marker if one exists
@@ -36,7 +36,7 @@ export class MapComponent implements AfterViewInit {
     });
 
     effect(() => {
-      const birds = this.birdStateService.allBirds();
+      const birds = this.birdStateService.recentNotableBirds();
       if (birds && this.map) {
         this.markerClusterGroup.clearLayers(); // clear old markers
         birds.forEach((bird) => {

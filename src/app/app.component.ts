@@ -12,6 +12,7 @@ import { BirdStateService } from './services/bird-state.service';
 export class AppComponent implements OnInit {
   birdStateService = inject(BirdStateService);
   ngOnInit(): void {
-    this.birdStateService.loadSpecies();
+    this.birdStateService.loadRecentNotableObservations();
+    this.birdStateService.loadRegionSpecies();
   }
 }

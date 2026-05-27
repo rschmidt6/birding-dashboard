@@ -9,17 +9,13 @@ import { BirdStateService } from '../../../services/bird-state.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   private birdStateService = inject(BirdStateService);
 
   isLoading = this.birdStateService.isLoading;
-  notableObservations = this.birdStateService.allBirds;
-
-  ngOnInit() {
-    this.birdStateService.loadBirds();
-  }
+  notableObservations = this.birdStateService.recentNotableBirds;
 
   selectBird(bird: Bird) {
-    this.birdStateService.setCurrentBird(bird);
+    this.birdStateService.setselectedNotableBird(bird);
   }
 }

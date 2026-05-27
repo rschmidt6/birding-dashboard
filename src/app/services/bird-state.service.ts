@@ -8,25 +8,22 @@ import { Taxonomy } from '../models/taxonomy.model';
   providedIn: 'root',
 })
 export class BirdStateService {
-  currentBird = signal<Bird | null>(null);
-  allBirds = signal<Bird[] | null>(null);
+  selectedNotableBird = signal<Bird | null>(null);
+  recentNotableBirds = signal<Bird[] | null>(null);
   fullTaxonomyList = signal<Taxonomy[] | null>(null);
-  birdDataService = inject(BirdDataService);
   isLoading = signal<boolean>(true);
 
-  setAllBirds(birds: Bird[]) {
-    this.allBirds.set(birds);
+  private birdDataService = inject(BirdDataService);
+
+  setselectedNotableBird(bird: Bird) {
+    this.selectedNotableBird.set(bird);
   }
 
-  setCurrentBird(bird: Bird) {
-    this.currentBird.set(bird);
-  }
-
-  loadBirds() {
+  loadRecentNotableObservations() {
     this.birdDataService
       .getRecentNotableObservations()
       .subscribe((data: Bird[]) => {
-        this.allBirds.set(
+        this.recentNotableBirds.set(
           data.map((bird) => ({
             ...bird,
             obsDt: bird.obsDt.replace(' ', 'T') + '-05:00',
@@ -36,7 +33,7 @@ export class BirdStateService {
       });
   }
 
-  loadSpecies() {
+  loadRegionSpecies() {
     const cached = localStorage.getItem('ebird-region-species');
 
     // caching the region species so that we dont have to get the full 18k object taxonomy every page reload
