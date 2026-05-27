@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Bird } from '../models/bird.model';
+import { Taxonomy } from '../models/taxonomy.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,14 @@ export class BirdDataService {
 
   constructor(private http: HttpClient) {}
 
+  getFullTaxonomyList() {
+    return this.http.get<Taxonomy[]>(
+      `${this.baseUrl}/ref/taxonomy/ebird?fmt=json`,
+      {
+        headers: { 'X-eBirdApiToken': this.apiKey },
+      },
+    );
+  }
   getRecentObservations() {
     return this.http.get<Bird[]>(
       `${this.baseUrl}/data/obs/${this.regionCode}/recent`,
@@ -29,7 +38,16 @@ export class BirdDataService {
     );
   }
 
-  getHotspots() {
-    return this.http.get(`{${this.baseUrl}/ref/hotspot/${this.regionCode}`);
+  // getHotspots() {
+  //   return this.http.get(`{${this.baseUrl}/ref/hotspot/${this.regionCode}`);
+  // }
+
+  getSpeciesList() {
+    return this.http.get<string>(
+      `${this.baseUrl}/product/spplist/${this.regionCode}`,
+      {
+        headers: { 'X-eBirdApiToken': this.apiKey },
+      },
+    );
   }
 }

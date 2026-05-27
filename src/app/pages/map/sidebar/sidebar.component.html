@@ -9,7 +9,7 @@
       <p class="bird-name">{{ bird.comName }}</p>
       <p class="bird-location">{{ bird.locName }}</p>
       <p class="bird-time">
-        {{ bird.obsDt | date }} - {{ bird.obsDt | date: "shortTime" }}
+        {{ bird.obsDt | date }} - {{ bird.obsDt | date: "shortTime" : "-0500" }}
       </p>
     </div>
   }
