@@ -1,1 +1,8 @@
-<p>species-detail works!</p>
+@if (selectedSpecies()) {
+  <div class="species-detail">
+    <div>{{ selectedSpecies()!.comName }}</div>
+    <div>{{ selectedSpecies()!.sciName }}</div>
+  </div>
+} @else {
+  <p>select bird!</p>
+}

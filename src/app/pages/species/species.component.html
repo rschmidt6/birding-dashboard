@@ -1,3 +1,15 @@
-@for (bird of birds(); track bird.sciName) {
-  <p>{{ bird.comName }}</p>
-}
+<div class="species-list">
+  @for (bird of species(); track bird.sciName) {
+    <div
+      class="species-card"
+      (click)="selectSpeciesDetail(bird)"
+      [class.active]="bird.speciesCode === selectedSpecies()"
+    >
+      {{ bird.comName }}
+    </div>
+  }
+</div>
+
+<div class="species-detail">
+  <router-outlet />
+</div>
