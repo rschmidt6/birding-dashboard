@@ -10,6 +10,7 @@ export class BirdDataService {
   private apiKey = '52hmur36h0mr';
   private baseUrl = 'https://api.ebird.org/v2';
   private regionCode = 'US-TX-453';
+  private travisCountyLatLong = [30.2672, -97.7431];
 
   constructor(private http: HttpClient) {}
 
@@ -40,6 +41,15 @@ export class BirdDataService {
   getRecentNotableObservations() {
     return this.http.get<Bird[]>(
       `${this.baseUrl}/data/obs/${this.regionCode}/recent/notable`,
+      {
+        headers: { 'X-eBirdApiToken': this.apiKey },
+      },
+    );
+  }
+
+  getRecentNearbySpeciesObservations(speciesCode: string) {
+    return this.http.get(
+      `${this.baseUrl}/data/obs/geo/recent/${speciesCode}?lat=${this.travisCountyLatLong[0]}&lng=${this.travisCountyLatLong[1]}`,
       {
         headers: { 'X-eBirdApiToken': this.apiKey },
       },

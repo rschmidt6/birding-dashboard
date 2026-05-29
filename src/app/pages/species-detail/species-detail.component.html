@@ -1,7 +1,11 @@
 @if (selectedSpecies()) {
   <div class="species-detail">
-    <div>{{ selectedSpecies()!.comName }}</div>
+    <h2>{{ selectedSpecies()!.comName }}</h2>
+    <div>{{ selectedSpecies()!.familyComName }}</div>
     <div>{{ selectedSpecies()!.sciName }}</div>
+    <div>{{ selectedSpecies()!.order }}</div>
+
+    <h3>Recent sightings:</h3>
   </div>
 } @else {
   <p>select bird!</p>
