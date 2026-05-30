@@ -14,14 +14,15 @@ export class BirdDataService {
 
   constructor(private http: HttpClient) {}
 
-  getFullTaxonomyList() {
-    return this.http.get<Taxonomy[]>(
-      `${this.baseUrl}/ref/taxonomy/ebird?fmt=json`,
-      {
-        headers: { 'X-eBirdApiToken': this.apiKey },
-      },
-    );
-  }
+  // getFullTaxonomyList() {
+  //   return this.http.get<Taxonomy[]>(
+  //     `${this.baseUrl}/ref/taxonomy/ebird?fmt=json`,
+  //     {
+  //       headers: { 'X-eBirdApiToken': this.apiKey },
+  //     },
+  //   );
+  // }
+
   getSpeciesList() {
     return this.http.get<string[]>(
       `${this.baseUrl}/product/spplist/${this.regionCode}`,
@@ -48,8 +49,8 @@ export class BirdDataService {
   }
 
   getRecentNearbySpeciesObservations(speciesCode: string) {
-    return this.http.get(
-      `${this.baseUrl}/data/obs/geo/recent/${speciesCode}?lat=${this.travisCountyLatLong[0]}&lng=${this.travisCountyLatLong[1]}`,
+    return this.http.get<Bird[]>(
+      `${this.baseUrl}/data/obs/${this.regionCode}/recent/${speciesCode}`,
       {
         headers: { 'X-eBirdApiToken': this.apiKey },
       },

@@ -1,12 +1,29 @@
 @if (selectedSpecies()) {
   <div class="species-detail">
     <h2>{{ selectedSpecies()!.comName }}</h2>
-    <div>{{ selectedSpecies()!.familyComName }}</div>
-    <div>{{ selectedSpecies()!.sciName }}</div>
-    <div>{{ selectedSpecies()!.order }}</div>
 
-    <h3>Recent sightings:</h3>
+    <a
+      [href]="'https://ebird.org/species/' + selectedSpecies()?.speciesCode"
+      target="_blank"
+      >View on eBird</a
+    >
+
+    <h3>Recent sightings within the past 30 days:</h3>
+    <p>
+      *Results include only to most recent observation from each location
+      specified
+    </p>
+    @if (recentSightings()?.length === 0) {
+      <p>Not seen recently in this area :-(</p>
+    }
+
+    @for (
+      sighting of recentSightings();
+      track `${sighting.obsDt}-${sighting.lat}`
+    ) {
+      <p>{{ sighting.locName }}</p>
+    }
   </div>
 } @else {
-  <p>select bird!</p>
+  <p>select a bird!</p>
 }
