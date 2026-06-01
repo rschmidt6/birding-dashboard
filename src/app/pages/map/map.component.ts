@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, effect, inject } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BirdStateService } from '../../services/bird-state.service';
-import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +14,7 @@ export class MapComponent implements AfterViewInit {
   birdStateService = inject(BirdStateService);
   private map!: L.Map;
   private marker: L.Marker | null = null;
-  private markerClusterGroup!: L.MarkerClusterGroup;
+  private markerClusterGroup = L.markerClusterGroup();
 
   constructor() {
     effect(() => {
@@ -50,7 +50,6 @@ export class MapComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.markerClusterGroup = L.markerClusterGroup();
     this.initMap();
   }
   private initMap(): void {
