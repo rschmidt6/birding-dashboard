@@ -14,7 +14,7 @@ export class MapComponent implements AfterViewInit {
   birdStateService = inject(BirdStateService);
   private map!: L.Map;
   private marker: L.Marker | null = null;
-  private markerClusterGroup = L.markerClusterGroup();
+  private markerClusterGroup!: L.MarkerClusterGroup;
 
   constructor() {
     effect(() => {
@@ -50,6 +50,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.markerClusterGroup = L.markerClusterGroup();
     this.initMap();
   }
   private initMap(): void {
