@@ -1,5 +1,8 @@
 <nav>
-  <a routerLink="/">ATX Birding</a>
+  <a routerLink="/" class="brand">
+    <img src="gcw.png" height="40" />
+    Austin Birding
+  </a>
 
   <div class="nav-links">
     <a
@@ -10,7 +13,9 @@
       <!-- exact: true means only mark active on exactly '/', not on '/anything-else' -->
       Dashboard
     </a>
-    <a routerLink="/map" routerLinkActive="active"> Map </a>
-    <a routerLink="/species" routerLinkActive="active"> Species </a>
+    <a routerLink="/map" routerLinkActive="active">
+      Recent Notable Sightings
+    </a>
+    <a routerLink="/species" routerLinkActive="active"> Local Species List </a>
   </div>
 </nav>

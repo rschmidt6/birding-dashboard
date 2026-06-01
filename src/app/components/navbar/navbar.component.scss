@@ -1,3 +1,46 @@
 nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
   height: 60px;
+  background: #49563d; // dark olive green
+  color: #e8e4d9; // warm off-white
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 400; // lighter weight, more minimal
+  color: #e8e4d9;
+  text-decoration: none;
+  letter-spacing: 0.08em; // more spacing feels cleaner
+  text-transform: uppercase; // minimal/editorial feel
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+
+  a {
+    color: #a8a090; // muted warm gray
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #e8e4d9;
+    }
+    &.active {
+      color: #e8e4d9;
+    }
+  }
 }

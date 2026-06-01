@@ -53,7 +53,13 @@ export class MapComponent implements AfterViewInit {
     this.initMap();
   }
   private initMap(): void {
-    this.map = L.map('map').setView([30.2672, -97.7431], 12.2);
+    this.map = L.map('map', {
+      zoomControl: false, // disable default position
+    }).setView([30.2672, -97.7431], 10);
+
+    // add zoom controls back to bottom right
+    L.control.zoom({ position: 'bottomright' }).addTo(this.map);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(this.map);

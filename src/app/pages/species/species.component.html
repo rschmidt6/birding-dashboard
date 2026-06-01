@@ -1,5 +1,6 @@
 <div class="species-list">
-  @for (bird of species(); track bird.sciName) {
+  <input [formControl]="searchControl" placeholder="Search species..." />
+  @for (bird of filteredSpecies(); track bird.sciName) {
     <div
       class="species-card"
       (click)="selectSpeciesDetail(bird)"

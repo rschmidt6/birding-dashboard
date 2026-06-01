@@ -1,15 +1,24 @@
+<p class="sidebar-title">Recent Notable Sightings</p>
 @if (this.isLoading()) {
-  <p>loading...</p>
+  <p>Loading...</p>
 } @else {
   @for (
     bird of notableObservations();
     track `${bird.obsDt}${bird.subId}${bird.comName}`
   ) {
     <div class="bird-card" (click)="selectBird(bird)">
-      <p class="bird-name">{{ bird.comName }}</p>
+      <div class="bird-card-header">
+        <p class="bird-name">{{ bird.comName }}</p>
+        <a
+          [href]="'https://ebird.org/species/' + bird.speciesCode"
+          target="_blank"
+          class="ebird-link"
+          >eBird ↗</a
+        >
+      </div>
       <p class="bird-location">{{ bird.locName }}</p>
       <p class="bird-time">
-        {{ bird.obsDt | date }} - {{ bird.obsDt | date: "shortTime" : "-0500" }}
+        {{ bird.obsDt | date }} - {{ bird.obsDt | date: "shortTime" : "-0400" }}
       </p>
     </div>
   }
