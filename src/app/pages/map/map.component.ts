@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, effect, inject } from '@angular/core';
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BirdStateService } from '../../services/bird-state.service';
+import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-map',
