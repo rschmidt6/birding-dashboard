@@ -14,7 +14,7 @@ export class MapComponent implements AfterViewInit {
   birdStateService = inject(BirdStateService);
   private map!: L.Map;
   private marker: L.Marker | null = null;
-  private markerClusterGroup = L.markerClusterGroup();
+  private markers: L.Marker[] = [];
 
   constructor() {
     effect(() => {
@@ -38,13 +38,14 @@ export class MapComponent implements AfterViewInit {
     effect(() => {
       const birds = this.birdStateService.recentNotableBirds();
       if (birds && this.map) {
-        this.markerClusterGroup.clearLayers(); // clear old markers
+        this.markers.forEach((m) => m.remove());
+        this.markers = [];
         birds.forEach((bird) => {
-          L.marker([bird.lat, bird.lng])
+          const marker = L.marker([bird.lat, bird.lng])
             .bindPopup(bird.comName)
-            .addTo(this.markerClusterGroup);
+            .addTo(this.map);
+          this.markers.push(marker);
         });
-        this.map.addLayer(this.markerClusterGroup);
       }
     });
   }
