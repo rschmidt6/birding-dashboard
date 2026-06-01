@@ -63,6 +63,7 @@ export class MapComponent implements AfterViewInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(this.map);
+
     delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
@@ -71,5 +72,16 @@ export class MapComponent implements AfterViewInit {
       shadowUrl:
         'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     });
+
+    // manually trigger marker loading after map is ready
+    const birds = this.birdStateService.recentNotableBirds();
+    if (birds.length) {
+      birds.forEach((bird) => {
+        L.marker([bird.lat, bird.lng])
+          .bindPopup(bird.comName)
+          .addTo(this.markerClusterGroup);
+      });
+      this.map.addLayer(this.markerClusterGroup);
+    }
   }
 }

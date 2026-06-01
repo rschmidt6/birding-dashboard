@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  position: relative; /* establishes positioning context for children */
+  flex: 1;
+  overflow: hidden;
+}
+
+#species-map {
+  height: 600px;
+  width: 100%;
+}

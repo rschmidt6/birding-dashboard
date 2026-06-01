@@ -7,9 +7,13 @@ import { BirdDataService } from './bird-data.service';
 })
 export class BirdStateService {
   selectedNotableBird = signal<Bird | null>(null);
-  recentNotableBirds = signal<Bird[] | null>(null);
-  regionSpeciesList = signal<Bird[] | null>(null);
+  recentNotableBirds = signal<Bird[]>([]);
+  regionSpeciesList = signal<Bird[]>([]);
   isLoading = signal<boolean>(true);
+  selectedSpeciesCode = signal<string | null>(null);
+
+  selectedSpecies = signal<Bird | null>(null);
+  recentSightings = signal<Bird[] | null>(null);
 
   private birdDataService = inject(BirdDataService);
 
@@ -42,6 +46,7 @@ export class BirdStateService {
     }
 
     this.birdDataService.getRecentObservations().subscribe((data) => {
+      this.regionSpeciesList.set(data);
       try {
         localStorage.setItem('ebird-region-species', JSON.stringify(data));
         console.log('caching region species list...');

@@ -1,10 +1,17 @@
 <div class="species-list">
-  <input [formControl]="searchControl" placeholder="Search species..." />
+  <input
+    [formControl]="searchControl"
+    [placeholder]="
+      `Search ${birdStateService.regionSpeciesList()!.length} recently seen species...`
+    "
+  />
   @for (bird of filteredSpecies(); track bird.sciName) {
     <div
       class="species-card"
       (click)="selectSpeciesDetail(bird)"
-      [class.active]="bird.speciesCode === selectedSpecies()"
+      [class.active]="
+        bird.speciesCode === birdStateService.selectedSpeciesCode()
+      "
     >
       {{ bird.comName }}
     </div>

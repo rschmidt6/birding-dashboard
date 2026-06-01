@@ -1,5 +1,5 @@
 import { BirdStateService } from './../../services/bird-state.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Bird } from '../../models/bird.model';
 import { FormControl } from '@angular/forms';
@@ -14,11 +14,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class SpeciesComponent implements OnInit {
   birdStateService = inject(BirdStateService);
   router = inject(Router);
-  // species = this.birdStateService.regionSpeciesList;
-  selectedSpecies = signal<string | null>(null);
 
   searchControl = new FormControl('');
   filteredSpecies = signal<Bird[]>([]);
+  speciesListCount = computed(() => {
+    if (this.birdStateService.regionSpeciesList()) {
+      return this.birdStateService.regionSpeciesList().length;
+    }
+    return 0;
+  });
 
   ngOnInit(): void {
     this.filteredSpecies.set(this.birdStateService.regionSpeciesList() ?? []);
@@ -33,10 +37,22 @@ export class SpeciesComponent implements OnInit {
           ),
         );
       });
+
+    const hasActiveRoute = this.router.url.includes('/species/');
+    if (!hasActiveRoute) {
+      const lastSelectedCode = this.birdStateService.selectedSpeciesCode();
+      const list = this.birdStateService.regionSpeciesList();
+
+      const defaultBird = lastSelectedCode
+        ? list.find((b) => b.speciesCode === lastSelectedCode) // find last selected
+        : list[0]; // fallback to first bird
+
+      if (defaultBird) this.selectSpeciesDetail(defaultBird);
+    }
   }
 
   selectSpeciesDetail(species: Bird) {
-    this.selectedSpecies.set(species.speciesCode);
+    this.birdStateService.selectedSpeciesCode.set(species.speciesCode);
     this.router.navigate(['/species', species.speciesCode]);
   }
 }
