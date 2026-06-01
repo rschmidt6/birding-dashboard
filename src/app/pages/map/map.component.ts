@@ -77,12 +77,16 @@ export class MapComponent implements AfterViewInit {
     // manually trigger marker loading after map is ready
     const birds = this.birdStateService.recentNotableBirds();
     if (birds.length) {
-      birds.forEach((bird) => {
-        L.marker([bird.lat, bird.lng])
-          .bindPopup(bird.comName)
-          .addTo(this.markerClusterGroup);
-      });
-      this.map.addLayer(this.markerClusterGroup);
+      if (birds && this.map) {
+        this.markers.forEach((m) => m.remove());
+        this.markers = [];
+        birds.forEach((bird) => {
+          const marker = L.marker([bird.lat, bird.lng])
+            .bindPopup(bird.comName)
+            .addTo(this.map);
+          this.markers.push(marker);
+        });
+      }
     }
   }
 }
