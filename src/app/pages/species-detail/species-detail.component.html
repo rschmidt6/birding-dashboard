@@ -1,6 +1,11 @@
 <div class="species-detail">
   <div class="species-header">
-    <h2>{{ birdStateService.selectedSpecies()!.comName }}</h2>
+    <h2>
+      {{ birdStateService.selectedSpecies()!.comName }}
+      @if (birdStateService.recentSightings()?.length === 0) {
+        <span class="no-loc"> - No map data </span>
+      }
+    </h2>
     <a
       [href]="
         'https://ebird.org/species/' +
@@ -15,9 +20,6 @@
   <div class="species-meta">
     <h3>Recent sightings — past 30 days</h3>
     <p>Most recent observation per location only</p>
-    @if (birdStateService.recentSightings()?.length === 0) {
-      <p>Not seen recently in this area :-(</p>
-    }
   </div>
 </div>
 

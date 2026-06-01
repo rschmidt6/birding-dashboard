@@ -55,7 +55,7 @@ export class MapComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       zoomControl: false, // disable default position
-    }).setView([30.2672, -97.7431], 10);
+    }).setView([30.3, -97.95], 10);
 
     // add zoom controls back to bottom right
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
