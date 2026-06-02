@@ -1,1 +1,26 @@
-<p>checklists works!</p>
+<div class="checklists">
+  <h3 class="section-title">Recent Checklists</h3>
+  @for (
+    checklist of birdStateService.recentChecklists();
+    track checklist.subID
+  ) {
+    <div class="checklist-card">
+      <div class="checklist-row">
+        <span class="checklist-user">{{ checklist.userDisplayName }}</span>
+        <span class="checklist-location">{{ checklist.loc.locName }}</span>
+      </div>
+      <div class="checklist-row">
+        <span class="checklist-species"
+          >{{ checklist.numSpecies }} species</span
+        >
+        <span class="checklist-time">{{ checklist.obsTime }}</span>
+        <a
+          [href]="'https://ebird.org/checklist/' + checklist.subID"
+          target="_blank"
+          class="ebird-link"
+          >eBird ↗</a
+        >
+      </div>
+    </div>
+  }
+</div>

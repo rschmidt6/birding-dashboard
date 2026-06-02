@@ -12,7 +12,7 @@ export class BirdStateService {
   private birdDataService = inject(BirdDataService);
 
   selectedNotableBird = signal<Bird | null>(null);
-  recentNotableBirds = signal<Bird[]>([]);
+  recentNotableBirds = signal<Bird[] | null>(null);
   regionSpeciesList = signal<Bird[]>([]);
   isLoading = signal<boolean>(true);
   selectedSpeciesCode = signal<string | null>(null);

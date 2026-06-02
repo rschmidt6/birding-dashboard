@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  background: #f2f0eb;
+}
+
+.dashboard-columns {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 36px;
+  gap: 36px;
+}
+
+.column-card {
+  background: #fff;
+  border-radius: 12px;
+  flex: 1;
+  overflow-y: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}

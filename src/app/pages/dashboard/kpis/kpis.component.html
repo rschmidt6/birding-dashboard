@@ -32,10 +32,10 @@
   <div class="kpi">
     <span class="kpi-label">Latest Notable</span>
     <span class="kpi-value">{{
-      birdStateService.recentNotableBirds()[0]?.comName ?? "—"
+      birdStateService.recentNotableBirds()?.[0]?.comName ?? "—"
     }}</span>
     <span class="kpi-yesterday">{{
-      birdStateService.recentNotableBirds()[0]?.locName
+      birdStateService.recentNotableBirds()?.[0]?.locName
     }}</span>
   </div>
 </div>

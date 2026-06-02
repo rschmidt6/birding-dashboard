@@ -1,1 +1,39 @@
-<p>top100s works!</p>
+<div class="top100">
+  <div class="tab-header">
+    <h3 class="section-title">Top 100 Birders — Texas</h3>
+    <div class="tabs">
+      <button
+        [class.active]="activeTab() === 'today'"
+        (click)="activeTab.set('today')"
+      >
+        Today
+      </button>
+      <button
+        [class.active]="activeTab() === 'yesterday'"
+        (click)="activeTab.set('yesterday')"
+      >
+        Yesterday
+      </button>
+    </div>
+  </div>
+
+  @for (
+    birder of activeTab() === "today"
+      ? birdStateService.top100Today()
+      : birdStateService.top100Yesterday();
+    track birder.userId;
+    let i = $index
+  ) {
+    <div class="birder-row">
+      <span class="birder-rank">{{ i + 1 }}</span>
+      <span class="birder-name">{{ birder.userDisplayName }}</span>
+      <a
+        [href]="'https://ebird.org/profile/' + birder.profileHandle + '/US-TX/'"
+        target="_blank"
+        class="ebird-link"
+        >eBird Profile ↗</a
+      >
+      <span class="birder-species">{{ birder.numSpecies }} species</span>
+    </div>
+  }
+</div>

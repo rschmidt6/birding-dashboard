@@ -76,7 +76,7 @@ export class MapComponent implements AfterViewInit {
 
     // manually trigger marker loading after map is ready
     const birds = this.birdStateService.recentNotableBirds();
-    if (birds.length) {
+    if (birds?.length) {
       if (birds && this.map) {
         this.markers.forEach((m) => m.remove());
         this.markers = [];

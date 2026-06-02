@@ -4,4 +4,5 @@ export interface Top100Birder {
   numCompleteChecklists: number;
   rowNum: number;
   userId: string;
+  profileHandle: string;
 }
