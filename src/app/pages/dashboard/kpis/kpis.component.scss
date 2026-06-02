@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  border-bottom: 1px solid #e0ddd6;
+  background: #fff;
+  padding: 0 32px;
+}
+
+.kpi-bar {
+  display: flex;
+  gap: 0;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 32px 20px 0;
+  gap: 4px;
+  border-right: 1px solid #e0ddd6;
+  margin-right: 32px;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.kpi-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: #2c3325;
+  line-height: 1;
+}
+
+.kpi-yesterday {
+  font-size: 12px;
+  color: #bbb;
+}

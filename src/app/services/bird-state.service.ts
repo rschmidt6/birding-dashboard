@@ -25,7 +25,12 @@ export class BirdStateService {
   recentChecklists = signal<ChecklistListObject[]>([]);
   top100Today = signal<Top100Birder[]>([]);
   top100Yesterday = signal<Top100Birder[]>([]);
-  todayStatus = signal<{
+  todayStats = signal<{
+    numChecklists: number;
+    numContributors: number;
+    numSpecies: number;
+  } | null>(null);
+  yesterdayStats = signal<{
     numChecklists: number;
     numContributors: number;
     numSpecies: number;
@@ -80,6 +85,7 @@ export class BirdStateService {
     //recent checklist feed
     this.birdDataService.getRecentChecklists().subscribe((data) => {
       console.log('RECENT CHECKLISTS', data);
+      this.recentChecklists.set(data);
     });
 
     //need checklists loaded before we load this one
@@ -92,7 +98,20 @@ export class BirdStateService {
     this.birdDataService
       .getTop100(formatYear(now), formatMonth(now), formatDay(now))
       .subscribe((data) => {
-        console.log('TOP 100', data);
+        console.log('T TOP 100', data);
+        this.top100Today.set(data);
+      });
+
+    //top 100 yesterday
+    this.birdDataService
+      .getTop100(
+        formatYear(yesterday),
+        formatMonth(yesterday),
+        formatDay(yesterday),
+      )
+      .subscribe((data) => {
+        console.log('Y TOP 100', data);
+        this.top100Yesterday.set(data);
       });
 
     //birding stats of today, will also do yesterday in smaller text below
@@ -102,7 +121,22 @@ export class BirdStateService {
         formatMonth(now),
         formatDay(now),
       )
-      .subscribe((data) => console.log('STATS:', data));
+      .subscribe((data) => {
+        console.log('T  sSTATS:', data);
+        this.todayStats.set(data);
+      });
+
+    //stats yesterday
+    this.birdDataService
+      .getRegionalStatsOnADate(
+        formatYear(yesterday),
+        formatMonth(yesterday),
+        formatDay(yesterday),
+      )
+      .subscribe((data) => {
+        console.log('Y STATS:', data);
+        this.yesterdayStats.set(data);
+      });
 
     //not sure what to do with historical data right now, might just leave it. there doesnt seem to be a way to tell what is a notable sighting from this data
     // this.birdDataService
