@@ -16,6 +16,6 @@ export class SidebarComponent {
   notableObservations = this.birdStateService.recentNotableBirds;
 
   selectBird(bird: Bird) {
-    this.birdStateService.setselectedNotableBird(bird);
+    this.birdStateService.setSelectedNotableBird(bird);
   }
 }
