@@ -27,12 +27,16 @@
     <div class="birder-row">
       <span class="birder-rank">{{ i + 1 }}</span>
       <span class="birder-name">{{ birder.userDisplayName }}</span>
-      <a
-        [href]="'https://ebird.org/profile/' + birder.profileHandle + '/US-TX/'"
-        target="_blank"
-        class="ebird-link"
-        >eBird Profile ↗</a
-      >
+      @if (birder.profileHandle) {
+        <a
+          [href]="
+            'https://ebird.org/profile/' + birder.profileHandle + '/US-TX/'
+          "
+          target="_blank"
+          class="ebird-link"
+          >eBird Profile ↗</a
+        >
+      }
       <span class="birder-species">{{ birder.numSpecies }} species</span>
     </div>
   }
